@@ -8,9 +8,9 @@ int countc(char *filename);
 int main(int argc,char* argv[]){
 	char filname[30];
 	char operation;
-	int totalline;//???
-	int toalchar;//????
-	int totalword;//????
+	int totalline;//空行 
+	int toalchar;//字符 
+	int totalword;//单词 
       if(!strcmp(argv[1],"-w")) 
         countw(argv[2]);                
         else if(!strcmp(argv[1],"-c"))  
@@ -42,8 +42,8 @@ int countw(char *filename){
         for(i=0; i<bufferLen; i++){
             c = buffer[i];
             if( c==' ' || c=='\t'){  
-                !isLastBlank && wordNum++; //????????,???????????+1 
-                isLastBlank = 1;//??????
+                !isLastBlank && wordNum++; //当上一个不是空格，而这一个是空格时单词数+1 
+                isLastBlank = 1;//表明一个空格
             }else if(c!='\n'&&c!='\r'){  
                   
                 isLastBlank = 0;
@@ -57,7 +57,7 @@ int countw(char *filename){
     printf("totalword:%d ",totalword);
 	fp2=fopen("result.txt","a");
 	if(fp2){
-	fprintf(fp2,"????:%d\n",totalword);
+	fprintf(fp2,"单词总数:%d\n",totalword);
 	fclose(fp2);
 	}
 		return 0;
@@ -84,7 +84,7 @@ int countc(char *filename){
         for(i=0; i<bufferLen; i++){
             c = buffer[i];
             if( c==' ' || c=='\t'){  
-               isLastBlank = 1;//???????
+               isLastBlank = 1;//字符不统计空格
             }else if(c!='\n'&&c!='\r'){  
                 charNum++;  
                 isLastBlank = 0;
@@ -101,7 +101,7 @@ int countc(char *filename){
     printf("totalchar:%d",totalchar);
 	fp2=fopen("result.txt","a");
 	if(fp2){
-	fprintf(fp2,"????:%d\n",totalchar);
+	fprintf(fp2,"字符总数:%d\n",totalchar);
 	fclose(fp2);
 	}
 		return 0;
@@ -133,7 +133,7 @@ FILE *fp2=NULL;
         printf("totalline:%d",totalline);
 	fp2=fopen("result.txt","a");
 	if(fp2){
-	fprintf(fp2,"???:%d\n",totalline);
+	fprintf(fp2,"总行数:%d\n",totalline);
 	fclose(fp2);
 	}
 		return 0;
